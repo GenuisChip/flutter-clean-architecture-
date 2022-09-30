@@ -1,5 +1,7 @@
-abstract class ProductEntity {
-  ProductEntity({
+import 'package:equatable/equatable.dart';
+
+abstract class ProductEntity extends Equatable {
+  const ProductEntity({
     required this.id,
     required this.title,
     required this.description,
@@ -24,4 +26,19 @@ abstract class ProductEntity {
   final String category;
   final String thumbnail;
   final List<String> images;
+
+  @override
+  List<Object?> get props => [
+        id,
+        title,
+        description,
+        price,
+        discountPercentage,
+        rating,
+        stock,
+        brand,
+        category,
+        thumbnail,
+        images,
+      ];
 }
