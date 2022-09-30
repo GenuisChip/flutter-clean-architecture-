@@ -2,9 +2,9 @@ import 'package:products_clean_architecture/layers/data/api_service/api_service.
 import 'package:products_clean_architecture/layers/data/data_source_if/products_data_source.dart';
 import 'package:products_clean_architecture/layers/data/models/product_model.dart';
 
-class ProductsDataSource extends APIService<Product>
+class ProductsNetworkDataSource extends APIService<Product>
     implements ProductsNetworkDataSourceIF {
-  ProductsDataSource({required super.endpoint});
+  ProductsNetworkDataSource() : super(endpoint: "products");
 
   @override
   fromCreate(json) {
@@ -26,7 +26,7 @@ class ProductsDataSource extends APIService<Product>
 
   @override
   List<Product> fromJsonList(json) {
-    return Product.fromJsonList(json);
+    return Product.fromJsonList(json["products"]);
   }
 
   @override

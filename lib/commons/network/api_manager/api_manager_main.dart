@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:products_clean_architecture/layers/api_manager/api_manager_response.dart';
+
+import 'api_manager_response.dart';
 
 enum RequestType { get, create, update, delete }
 

@@ -1,5 +1,5 @@
-import 'package:products_clean_architecture/layers/api_manager/api_manager.dart';
-import 'package:products_clean_architecture/layers/api_manager/api_manager_response.dart';
+
+import 'package:products_clean_architecture/commons/network/api_manager/api_manager.dart';
 
 abstract class APIService<RESPONSE_TYPE> {
   final apiManager = APIManager.getInstance("https://dummyjson.com/");
