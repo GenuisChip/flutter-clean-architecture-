@@ -25,7 +25,7 @@ class APIManager {
     required RequestType requestType,
     Map<String, dynamic>? body,
   }) async {
-    final url = "${baseUrl}products";
+    final url = "$baseUrl$endpoint";
     final uri = Uri.parse(url);
     _logger.d("call : $url");
     http.Response? response;

@@ -3,5 +3,5 @@ import 'package:products_clean_architecture/layers/domain/entities/product_entit
 
 abstract class ProductRepoIF {
   Future<ApiManagerResponse<List<ProductEntity>>> getAllProducts();
-  Future<ProductEntity> getProductId(int id);
+  Future<ApiManagerResponse<ProductEntity>> getProductId(int id);
 }

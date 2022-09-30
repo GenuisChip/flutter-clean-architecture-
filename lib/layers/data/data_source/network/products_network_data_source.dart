@@ -20,8 +20,7 @@ class ProductsNetworkDataSource extends APIService<Product>
 
   @override
   Product fromJson(json) {
-    // TODO: implement fromJson
-    throw UnimplementedError();
+    return Product.fromJson(json);
   }
 
   @override

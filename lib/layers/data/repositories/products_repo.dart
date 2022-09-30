@@ -11,8 +11,7 @@ class ProductsRepo implements ProductRepoIF {
   }
 
   @override
-  Future<ProductEntity> getProductId(int id) {
-    // TODO: implement getProductId
-    throw UnimplementedError();
+  Future<ApiManagerResponse<ProductEntity>> getProductId(int id) {
+    return productsDataSource.getOne(id.toString());
   }
 }

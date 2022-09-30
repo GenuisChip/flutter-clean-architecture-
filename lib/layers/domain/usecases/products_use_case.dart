@@ -6,11 +6,11 @@ class ProductsUseCase {
   final ProductRepoIF repo;
 
   ProductsUseCase({required this.repo});
-  Future<ApiManagerResponse< List<ProductEntity>>> getAllProducts() async {
+  Future<ApiManagerResponse<List<ProductEntity>>> getAllProducts() async {
     return repo.getAllProducts();
   }
 
-  Future<ProductEntity> getProductById(id) async {
+  Future<ApiManagerResponse<ProductEntity>> getProductById(int id) async {
     return repo.getProductId(id);
   }
 }

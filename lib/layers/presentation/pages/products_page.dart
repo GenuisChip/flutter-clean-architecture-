@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:products_clean_architecture/layers/domain/entities/product_entity.dart';
 import 'package:products_clean_architecture/layers/presentation/cubit/products_cubit.dart';
+import 'package:products_clean_architecture/layers/presentation/pages/product_details_page.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({Key? key}) : super(key: key);
@@ -43,6 +45,15 @@ class ProductsPage extends StatelessWidget {
                       itemBuilder: (context, i) {
                         final item = state.products[i];
                         return ListTile(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ProductDetailsPage(id: item.id),
+                              ),
+                            );
+                          },
                           leading: Image.network(
                             item.thumbnail,
                             width: 100,

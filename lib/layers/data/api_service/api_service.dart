@@ -1,4 +1,3 @@
-
 import 'package:products_clean_architecture/commons/network/api_manager/api_manager.dart';
 
 abstract class APIService<RESPONSE_TYPE> {
@@ -21,7 +20,7 @@ abstract class APIService<RESPONSE_TYPE> {
 
   Future<ApiManagerResponse<RESPONSE_TYPE>> getOne(String id) async {
     final res = await apiManager.makeRequest(
-      endpoint: endpoint,
+      endpoint: "$endpoint/$id",
       requestType: RequestType.get,
     );
     if (res.isSuccess) {
