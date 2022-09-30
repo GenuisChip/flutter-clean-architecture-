@@ -1,12 +1,15 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
 
 import 'api_manager_response.dart';
 
 enum RequestType { get, create, update, delete }
 
 class APIManager {
+  final _logger = Logger();
+
   /// baseUrl ends with slash , eg https://example.com/
   final String baseUrl;
   static APIManager? _instance;
@@ -22,12 +25,27 @@ class APIManager {
     required RequestType requestType,
     Map<String, dynamic>? body,
   }) async {
-    final url = Uri.parse("${baseUrl}products");
+    final url = "${baseUrl}products";
+    final uri = Uri.parse(url);
+    _logger.d("call : $url");
     http.Response? response;
     try {
-      response = await _makeRequestByType(requestType, url: url, body: body);
+      response = await _makeRequestByType(requestType, uri: uri, body: body);
+
       final isSuccess = response.statusCode >= 200 && response.statusCode < 300;
-      return ApiManagerResponse(
+      final log = {
+        "url": url,
+        "method": requestType.name,
+        "body": body,
+        "statusCode": response.statusCode,
+        "response": isSuccess ? jsonDecode(response.body) : response.body
+      };
+      if (isSuccess) {
+        _logger.d(log);
+      } else {
+        _logger.e(log);
+      }
+      final res = ApiManagerResponse(
         serverErrorMsg: "serverErrorMsg",
         statusCode: response.statusCode,
         isSuccess: isSuccess,
@@ -35,7 +53,15 @@ class APIManager {
         error: response.body,
         data: isSuccess ? jsonDecode(response.body) : null,
       );
+      return res;
     } catch (e) {
+      _logger.e({
+        "url": url,
+        "method": requestType.name,
+        "body": body,
+        "statusCode": "Request Failed",
+        "response": e.toString(),
+      });
       return ApiManagerResponse(
         serverErrorMsg: "serverErrorMsg",
         statusCode: response?.statusCode ?? 0,
@@ -49,15 +75,15 @@ class APIManager {
 
   Future<http.Response> _makeRequestByType(
     RequestType requestType, {
-    required Uri url,
+    required Uri uri,
     Map<String, dynamic>? body,
   }) async {
     var client = http.Client();
     final Map<RequestType, Future<http.Response>> request = {
-      RequestType.create: client.post(url, body: jsonEncode(body)),
-      RequestType.update: client.put(url, body: body),
-      RequestType.delete: client.delete(url),
-      RequestType.get: client.get(url),
+      RequestType.create: client.post(uri, body: jsonEncode(body)),
+      RequestType.update: client.put(uri, body: body),
+      RequestType.delete: client.delete(uri),
+      RequestType.get: client.get(uri),
     };
     return await request[requestType]!;
   }
