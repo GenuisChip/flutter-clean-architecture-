@@ -7,7 +7,7 @@ abstract class ProductsNetworkDataSourceIF {
 }
 
 abstract class ProductsLocalDataSourceIF {
-  Future<List<Product>> getAllProducts();
-  Future<Product> getProductById();
+  Future<List<Product>> getAll();
+  Future<Product?> getOne(String id);
   Future<List<Product>> cacheProductsList(List<Product> list);
 }

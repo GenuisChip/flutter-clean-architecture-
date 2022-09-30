@@ -1,8 +1,8 @@
 class ApiManagerResponse<T> {
-  final String serverErrorMsg;
+  final String? serverErrorMsg;
   final String? rawData;
   final int statusCode;
-  final String error;
+  final String? error;
   final bool isSuccess;
   final T? data;
 
