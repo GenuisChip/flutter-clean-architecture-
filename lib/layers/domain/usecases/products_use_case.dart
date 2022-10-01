@@ -13,4 +13,8 @@ class ProductsUseCase {
   Future<ApiManagerResponse<ProductEntity>> getProductById(int id) async {
     return repo.getProductId(id);
   }
+
+  Future<ApiManagerResponse<List<ProductEntity>>> search(String text) async {
+    return repo.search(text);
+  }
 }

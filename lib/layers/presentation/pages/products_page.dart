@@ -9,12 +9,25 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<ProductsCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Products"),
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              onChanged: cubit.search,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                label: Text("Search"),
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+              ),
+            ),
+          ),
           OutlinedButton(
             onPressed: () {
               Navigator.push(
@@ -41,6 +54,14 @@ class ProductsPage extends StatelessWidget {
               }
               if (state is Loading || state is ProductsInitial) {
                 return const Center(child: CircularProgressIndicator());
+              }
+              if (state is ProductSearch) {
+                return Column(
+                  children: const [
+                    CircularProgressIndicator(),
+                    Text("Searching"),
+                  ],
+                );
               }
               if (state is Success) {
                 return Expanded(

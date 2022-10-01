@@ -1,3 +1,4 @@
+import 'package:products_clean_architecture/commons/network/api_manager/api_manager.dart';
 import 'package:products_clean_architecture/layers/data/api_service/api_service.dart';
 import 'package:products_clean_architecture/layers/data/data_source_if/products_data_source.dart';
 import 'package:products_clean_architecture/layers/data/models/product_model.dart';
@@ -5,6 +6,11 @@ import 'package:products_clean_architecture/layers/data/models/product_model.dar
 class ProductsNetworkDataSource extends APIService<Product>
     implements ProductsNetworkDataSourceIF {
   ProductsNetworkDataSource() : super(endpoint: "products");
+
+  @override
+  Future<ApiManagerResponse<List<Product>>> search(String text) {
+    return getAll(endpoint: "products/search?q=$text");
+  }
 
   @override
   fromCreate(json) {

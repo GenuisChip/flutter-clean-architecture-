@@ -10,6 +10,7 @@ abstract class ProductsState extends Equatable {
 class ProductsInitial extends ProductsState {}
 
 class Loading extends ProductsState {}
+class ProductSearch extends ProductsState {}
 
 class Success extends ProductsState {
   final List<ProductEntity> products;

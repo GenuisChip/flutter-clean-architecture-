@@ -66,4 +66,9 @@ class ProductsRepo implements ProductRepoIF {
       );
     }
   }
+
+  @override
+  Future<ApiManagerResponse<List<ProductEntity>>> search(String text) {
+    return productsDataSource.search(text);
+  }
 }

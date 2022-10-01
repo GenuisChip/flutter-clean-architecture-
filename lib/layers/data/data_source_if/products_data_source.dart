@@ -4,6 +4,7 @@ import 'package:products_clean_architecture/layers/data/models/product_model.dar
 abstract class ProductsNetworkDataSourceIF {
   Future<ApiManagerResponse<List<Product>>> getAll();
   Future<ApiManagerResponse<Product>> getOne(String id);
+  Future<ApiManagerResponse<List<Product>>> search(String text);
 }
 
 abstract class ProductsLocalDataSourceIF {
