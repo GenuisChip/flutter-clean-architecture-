@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:products_clean_architecture/layers/domain/entities/product_entity.dart';
 import 'package:products_clean_architecture/layers/presentation/cubit/products_cubit.dart';
 import 'package:products_clean_architecture/layers/presentation/pages/product_details_page.dart';
+import 'package:products_clean_architecture/layers/presentation/pages/users_page.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({Key? key}) : super(key: key);
@@ -15,6 +15,17 @@ class ProductsPage extends StatelessWidget {
       ),
       body: Column(
         children: [
+          OutlinedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const UsersPage(),
+                ),
+              );
+            },
+            child: const Text("Users"),
+          ),
           BlocConsumer<ProductsCubit, ProductsState>(
             listener: (context, state) {
               if (state is Failed) {
