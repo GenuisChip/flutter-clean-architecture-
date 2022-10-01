@@ -9,6 +9,8 @@ abstract class UsersState extends Equatable {
 
 class UsersInitial extends UsersState {}
 
+class UsersSearch extends UsersState {}
+
 class UsersLoading extends UsersState {}
 
 class UsersFinished extends UsersState {

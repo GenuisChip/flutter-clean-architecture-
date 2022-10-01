@@ -1,13 +1,18 @@
 import 'package:products_clean_architecture/commons/network/api_manager/api_manager.dart';
+import 'package:products_clean_architecture/layers/domain/entities/query_params.dart';
 
 abstract class APIService<RESPONSE_TYPE> {
   final apiManager = APIManager.getInstance("https://dummyjson.com/");
   final String endpoint;
   APIService({required this.endpoint});
 
-  Future<ApiManagerResponse<List<RESPONSE_TYPE>>> getAll() async {
+  Future<ApiManagerResponse<List<RESPONSE_TYPE>>> getAll({
+    QueryParams? params,
+    String? endpoint,
+  }) async {
+    final query = params != null ? "?${params.toString()}" : "";
     final res = await apiManager.makeRequest(
-      endpoint: endpoint,
+      endpoint: "${endpoint ?? this.endpoint}$query",
       requestType: RequestType.get,
     );
     if (res.isSuccess) {

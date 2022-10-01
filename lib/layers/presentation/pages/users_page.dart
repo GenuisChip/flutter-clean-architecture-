@@ -25,6 +25,18 @@ class _UsersPageState extends State<UsersPage> {
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              onChanged: cubit.search,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                label: Text("Search"),
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+              ),
+            ),
+          ),
           BlocBuilder<UsersCubit, UsersState>(
             builder: ((context, state) {
               if (state is UsersLoading) {
@@ -53,6 +65,13 @@ class _UsersPageState extends State<UsersPage> {
                       itemCount: users.length,
                     ),
                   ),
+                );
+              } else if (state is UsersSearch) {
+                return Column(
+                  children: const [
+                    CircularProgressIndicator(),
+                    Text("Search"),
+                  ],
                 );
               } else {
                 return const Text("Can't load data");
