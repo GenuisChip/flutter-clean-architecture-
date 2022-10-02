@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:products_clean_architecture/layers/presentation/cubit/posts_cubit.dart';
 import 'package:products_clean_architecture/layers/presentation/cubit/product_details_cubit.dart';
 import 'package:products_clean_architecture/layers/presentation/cubit/products_cubit.dart';
 import 'package:products_clean_architecture/layers/presentation/cubit/users_cubit.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => UsersCubit(usersRepo: di.sl()),
+        ),
+        BlocProvider(
+          create: (context) => PostsCubit(posts: di.sl()),
         ),
       ],
       child: MaterialApp(
